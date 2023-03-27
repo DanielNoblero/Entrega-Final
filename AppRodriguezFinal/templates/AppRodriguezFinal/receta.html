@@ -1,0 +1,33 @@
+{% extends "AppRodriguezFinal/base.html" %}
+{% load static %}
+
+{% block principal %}
+
+<main role="main" class="inner cover">
+  
+  <br>
+  <center><h1 class="cover-heading"> Recetas </h1></center>
+  <center><img src="{% static 'AppRodriguezFinal/assets/imagenes/descarga.jpg' %}" alt="centered image" height="500" width="900"> </center>
+  <center><form action="{% url 'receta_search'%}"class="d-flex">
+    <input class="text-center" name="criterio" type="search" placeholder="Buscar receta" aria-label="Buscar">
+    <button class="btn btn-outline-success" type="submit">Buscar</button>
+  </form></center>
+  <br>
+  {% if form %}
+  <form action="{% url 'receta_create'%}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Enviar">
+  </form>
+  <ul>
+    {% endif %}
+    <ul>
+    {% for receta in recetas %}
+
+    <li>● Nombre de receta: {{receta.Nombre_de_receta}} ● Autor: {{receta.Autor}}</li>
+
+    {% endfor %}
+    </ul>
+  </ul>
+</main>
+{% endblock %}

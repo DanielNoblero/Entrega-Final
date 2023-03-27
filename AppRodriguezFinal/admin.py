@@ -1,3 +1,4 @@
 from django.contrib import admin
+from AppRodriguezFinal.models import Receta
 
-# Register your models here.
+admin.site.register(Receta)

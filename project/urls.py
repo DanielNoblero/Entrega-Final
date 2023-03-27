@@ -1,23 +1,15 @@
-"""project URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.1/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path
-from AppRodriguezFinal.views import index
+from AppRodriguezFinal.views import index, loging, RecetaList, RecetaDetail, RecetaUpdate, RecetaDelete, RecetaCreate, RecetaSearch
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", index, name= "index"),
+    path("loging/", loging, name= "loging"),
+    path("receta/list", RecetaList.as_view(), name="receta_list"),
+    path('receta/<pk>/detail', RecetaDetail.as_view(), name="receta_detail"),
+    path('receta/<pk>/update', RecetaUpdate.as_view(), name="receta_update"),
+    path('receta/<pk>/delete', RecetaDelete.as_view(), name="receta_delete"),
+    path('receta/create', RecetaCreate.as_view(), name="receta_create"),
+    path('receta/search', RecetaSearch.as_view(), name="receta_search"),
 ]
