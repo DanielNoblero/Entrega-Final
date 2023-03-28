@@ -3,18 +3,19 @@
 {% load static %}
 
 {% block principal %}
-<br>
 <main role="main" class="inner cover">
-    <center><img src="{% static 'AppRodriguezFinal/assets/imagenes/descarga.jpg' %}" alt="centered image" height="500" width="900"> </center>
+    <center><img src="{% static 'AppRodriguezFinal/assets/imagenes/paisaje2.jpg' %}" alt="centered image" height="400" width="700"> </center>
     <h1 class="cover-heading"></h1>
     <p class="lead"></p>
     <p class="lead">
     </p>
-    </main>
+</main>
     <h1>Detalle de la receta</h1>
     <div>
         <ul> 
-            <li> {{receta.id}} Nombre de receta: {{receta.Nombre_de_receta}} Author: {{ receta.Autor}} Tiempo: {{ receta.Horas_de_prepracion}} </li>
+            <li> {{receta.id}} Nombre de receta: {{receta.Nombre_de_receta}} Author: {{ receta.Autor}} Tiempo: {{ receta.Horas_de_prepracion}} Preparacion: {{ receta.Preparacion}} </li>
+        <p><img height="265px" scr="{{receta.image_url}}"></p>
+        <p class="lead">{{receta.Nombre_de_receta}}</p>
         
         <a href="{% url 'receta_detail' receta.id %}">Actualizar</a>
         <a href="{% url 'receta_delete' receta.id %}">Borrar</a>

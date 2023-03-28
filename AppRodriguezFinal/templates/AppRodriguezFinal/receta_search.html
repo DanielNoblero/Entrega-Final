@@ -3,24 +3,21 @@
 
 {% block principal %}
 <main role="main" class="inner cover">
-        <center><img src="{% static 'AppRodriguez/assets/imagenes/paisaje3.jpg' %}" alt="centered image" height="500" width="900"> </center>
+        <center><img src="{% static 'AppRodriguez/assets/imagenes/receta_search.png' %}" alt="centered image" height="123" width="400"> </center>
         <h1 class="cover-heading"></h1>
         <p class="lead"></p>
         <p class="lead">
         </p>
-    </main>
-    <form action="{% url 'receta_search'%}"class="d-flex">
-        <input class="text-center" name="criterio" type="search" placeholder="Buscar receta" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Buscar</button>
-    </form></center>
+</main>
 
-    {% if receta %}
-            <h1>Resultado de busqueda<h1>
-            <ul>
-            
-            {% for recta in recetas %} 
-            <li> {{receta.Nombre_de_receta}}</li>
-            {% endfor %}
+
+        {% if form %}
+        <h1>Resultado de busqueda<h1>
+                <ul>
+
+                {% for recta in recetas %} 
+                <li> {{receta.Nombre_de_receta}}</li>
+                {% endfor %}
 
         </ul>
 

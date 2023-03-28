@@ -3,7 +3,15 @@
 {% load static %}
 
 {% block principal %}
-        <form method="post">
+<main role="main" class="inner cover">
+    <center><img src="{% static 'AppRodriguezFinal/assets/imagenes/chef.jpg' %}" alt="centered image" height="400" width="700"> </center>
+    <h1 class="cover-heading"></h1>
+    <p class="lead"></p>
+    <p class="lead">
+    </p>
+</main>
+
+        <form method="post" enctype="multipart/from-data">
             {% csrf_token %}
             {{form.as_p}}
             <input type="submit" value="Crear">

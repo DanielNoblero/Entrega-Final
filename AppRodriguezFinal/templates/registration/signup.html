@@ -1,0 +1,20 @@
+{% extends "AppRodriguezFinal/base.html" %}
+
+{% load static %}
+
+{% block principal %}
+    <main role="main" class="inner cover">
+        <center><img src="{% static 'AppRodriguezFinal/assets/imagenes/signup.png' %}" alt="centered image" height="168" width="300"> </center>
+        <h1 class="cover-heading"></h1>
+        <p class="lead"></p>
+        <p class="lead">
+        </p>
+    </main>
+
+<h2>Registar usuario</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Ingresar">
+</form>
+{% endblock %}

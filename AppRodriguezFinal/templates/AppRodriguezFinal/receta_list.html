@@ -4,7 +4,7 @@
 
 {%block principal %}
 <main role="main" class="inner cover">
-    <center><img src="{% static 'AppRodriguezFinal/assets/imagenes/descarga.jpg' %}" alt="centered image" height="500" width="900"> </center>
+    <center><img src="{% static 'AppRodriguezFinal/assets/imagenes/recetas.png' %}" alt="centered image" height="190" width="266"> </center>
     <h1 class="cover-heading"></h1>
     <p class="lead"></p>
     <p class="lead">
@@ -15,7 +15,7 @@
     {% for receta in recetas %}     
     <li> {{receta.Nombre_de_receta}} - {{receta.Autor}} -{{ receta.Rendimiento}}  
         <a href="{% url 'receta_detail' receta.id %}">Detalle</a>
-        {% if user.is_authenticated %}
+        {% if user.is_authenticated and user.id == receta.publisher.id %}
             <a href="{% url 'receta_update' receta.Nombre_de_receta %}">Actualizar</a>
             <a href="{% url 'receta_delete' receta.Nombre_de_receta %}">Borrar</a>
         {%endif%}
