@@ -10,11 +10,11 @@
     <p class="lead"></p>
     <p class="lead">
     </p>
-  </main>
+    </main>
     <h1>Detalle de la receta</h1>
     <div>
         <ul> 
-            <li> {{receta.id}} - {{receta.Nombre_de_receta}} -{{ receta.Autor}}  </li>
+            <li> {{receta.id}} Nombre de receta: {{receta.Nombre_de_receta}} Author: {{ receta.Autor}} Tiempo: {{ receta.Horas_de_prepracion}} </li>
         
         <a href="{% url 'receta_detail' receta.id %}">Actualizar</a>
         <a href="{% url 'receta_delete' receta.id %}">Borrar</a>

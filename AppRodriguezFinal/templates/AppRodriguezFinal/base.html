@@ -2,16 +2,16 @@
 <html lang="en">
   
 {% load static %}
- 
+
   <head>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+    
 
-    <title>tercera pre entrega</title>
+    <title>Recetas</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'AppRodriguezFinal/assets/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -26,15 +26,29 @@
     <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
         <div class="inner">
+          <img src="{% static 'AppRodriguezFinal/assets/imagenes/logo.png' %}" alt="centered image" height="50" width="100">
           <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link active " href="http://127.0.0.1:8000/admin">Admin</a>
             <a class="nav-link active" href="{% url 'index' %}">Inicio</a>
-            <a class="nav-link active" href="{% url 'receta_create' %}">Agregar receta</a>
-            <a class="nav-link active" href="{% url 'receta_list' %}">Ver recetas</a>
-            <a class="nav-link active " href="{% url 'receta_search' %}">Buscar</a>
-            <a class="nav-link active" href="#">
-              
+            {% if user.is_authenticated %}
+            
+                <a class="nav-link active" href="{% url 'receta_list' %}">Ver recetas</a>
+            
+                <a class="nav-link active" href="{% url 'receta_create' %}">Agregar receta</a>
+            
+            
+                <a class="nav-link active" href="{% url 'logout' %}"> Hola {{user.username}} | Salir</a>
+            
+              {% else %}
+            
+                <a class="nav-link active" href="{% url 'login' %}">Ingresar</a>
+            
+            {% endif %}
+              <li class="nav-item">            
+              <form action="{% url 'receta_search' %}" class="d-flex">
+                <input class="form-control me-2" name="criterio" type="search" placeholder="Buscar receta" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Buscar</button>
               </form>
+            </li>
             </a>
           </nav>
         </div>
