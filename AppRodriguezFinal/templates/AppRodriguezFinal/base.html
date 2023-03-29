@@ -9,8 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    
-
+   
     <title>Recetas</title>
 
     <!-- Bootstrap core CSS -->
@@ -36,9 +35,30 @@
                 <a class="nav-link active" href="{% url 'receta_mine' %}">Mis recetas</a>
             
                 <a class="nav-link active" href="{% url 'receta_create' %}">Agregar receta</a>
+
+              
+                  <a class="nav-link active" href="{% url 'mensaje_create' %}"> Enviar Mensajes</a>
+              
+
+              {% if user.profile %}
             
+                <a class="nav-link active" href="{% url 'profile_update' user.profile.id %}">Actualizar Perfil</a>
             
-                <a class="nav-link active" href="{% url 'logout' %}"> Hola {{user.username}} | Salir</a>
+              {% else %}
+            
+                <a class="nav-link active" href="{% url 'profile_create' %}">Crear Perfil</a>
+            
+              {% endif %}
+
+            
+              <a class="nav-link active" href="{% url 'mensaje_list' %}">Mensajes</a>
+            
+
+              {%if user.profile.avatar_url %}
+              <img src="{{user.profile.avatar_url}}" height="100%" width="64px">
+              {% else %}
+              {% endif %}
+              <a class="nav-link active" href="{% url 'logout' %}">{{ user.username }} | Salir</a>
             
               {% else %}
               <a class="nav-link active" href="{% url 'signup' %}">Registrarse</a>

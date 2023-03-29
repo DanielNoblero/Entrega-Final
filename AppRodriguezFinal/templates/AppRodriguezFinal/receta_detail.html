@@ -13,11 +13,11 @@
     <h1>Detalle de la receta</h1>
     <div>
         <ul> 
-            <li> {{receta.id}} Nombre de receta: {{receta.Nombre_de_receta}} Author: {{ receta.Autor}} Tiempo: {{ receta.Horas_de_prepracion}} </li>
-        <p><img height="265px" scr="{{receta.image_url}}"></p>
+            {{receta.id}} Nombre de receta: {{receta.Nombre_de_receta}} Author: {{ receta.Autor}} Tiempo: {{ receta.Horas_de_prepracion}} 
+        
         
         <p class="lead">{{receta.Preparacion}}</p>
-        
+        <p><img  scr="{{recetas.image_url}}" height="190" width="266"></p>
         <a href="{% url 'receta_detail' receta.id %}">Actualizar</a>
         <a href="{% url 'receta_delete' receta.id %}">Borrar</a>
         </ul>

@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from AppRodriguezFinal.models import Receta, Profile, Mensaje
-from AppRodriguezFinal.forms import RecetaForm
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
 from django.contrib.auth.views import LoginView, LogoutView
@@ -10,8 +9,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 def index(request):
     recetas =  Receta.objects.all().order_by("-creado_el")[:5]
-    return render(request, "AppRodriguezFinal/index.html", {"recetas": recetas})
+    return render(request, "AppRodriguezFinal/index.html")
 
+def about(request):
+    return render(request, "AppRodriguezFinal/about.html")
 
 class RecetaList(ListView):
     model = Receta
@@ -84,7 +85,7 @@ class SignUp(CreateView):
 class ProfileCreate (CreateView):
     model = Profile
     success_url = reverse_lazy('receta_list')
-    fields = ['avatar',]
+    fields = ['avatar']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -93,21 +94,21 @@ class ProfileCreate (CreateView):
 class ProfileUpdate(LoginRequiredMixin, UserPassesTestMixin,  UpdateView):
     model = Profile
     success_url = reverse_lazy("receta_list")
-    fields = ['avatar',]
+    fields = ['avatar']
 
     def test_func(self):
         return Profile.objects.filter(user=self.request.user).exists()
 
 class MensajeCreate(CreateView):
     model = Mensaje
-    success_url = reverse_lazy('mensaje-create')
+    success_url = reverse_lazy('mensaje_create')
     fields = '__all__'
 
 
 class MensajeDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Mensaje
     context_object_name = "mensaje"
-    success_url = reverse_lazy("mensaje-list")
+    success_url = reverse_lazy("mensaje_list")
 
     def test_func(self):
         return Mensaje.objects.filter(destinatario=self.request.user).exists()
