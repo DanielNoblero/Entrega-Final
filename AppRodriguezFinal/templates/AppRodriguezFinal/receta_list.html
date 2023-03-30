@@ -15,10 +15,9 @@
     {% for receta in recetas %}     
     <li> {{receta.Nombre_de_receta}} - {{receta.Autor}} -{{ receta.Rendimiento}}  
         <a href="{% url 'receta_detail' receta.id %}">Detalle</a>
-        {% if user.is_authenticated and user.id == receta.Publicador.id %}
-            <a href="{% url 'receta_update' receta.Nombre_de_receta %}">Actualizar</a>
-            <a href="{% url 'receta_delete' receta.Nombre_de_receta %}">Borrar</a>
-        {%endif%}
+        
+            
+        
     </li>
     {%endfor%}
 </ul>

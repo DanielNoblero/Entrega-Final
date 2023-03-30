@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 def index(request):
     recetas =  Receta.objects.all().order_by("-creado_el")[:5]
-    return render(request, "AppRodriguezFinal/index.html")
+    return render(request, "AppRodriguezFinal/index.html",{"recetas": recetas})
 
 def about(request):
     return render(request, "AppRodriguezFinal/about.html")
@@ -18,7 +18,7 @@ class RecetaList(ListView):
     model = Receta
     context_object_name = "recetas"
 
-class RecetaMineList(RecetaList):
+class RecetaMineList(LoginRequiredMixin, RecetaList):
     
     def get_queryset(self):
         return Receta.objects.filter(Publicador=self.request.user.id).all() # type: ignore
@@ -34,18 +34,18 @@ class RecetaUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         user_id = self.request.user.id # type: ignore
-        post_id = self.kwargs.get("pk")
-        return Receta.objects.filter(Publicador=user_id, id=post_id).exists()
+        receta_id = self.kwargs.get("pk")
+        return Receta.objects.filter(Publicador=user_id, id=receta_id).exists()
 
-class RecetaDelete(LoginRequiredMixin, DeleteView):
+class RecetaDelete(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
     model = Receta
     context_object_name = "receta"
     success_url = reverse_lazy("receta_list")
 
     def test_func(self):
         user_id = self.request.user.id # type: ignore
-        post_id = self.kwargs.get("pk")
-        return Receta.objects.filter(Publicador=user_id,id=post_id).exists()
+        receta_id = self.kwargs.get("pk")
+        return Receta.objects.filter(Publicador=user_id,id=receta_id).exists()
 
 class RecetaCreate(LoginRequiredMixin, CreateView):
     model = Receta
@@ -82,10 +82,10 @@ class SignUp(CreateView):
     template_name = "registration/signup.html"
     success_url = reverse_lazy('receta_list')
 
-class ProfileCreate (CreateView):
+class ProfileCreate (LoginRequiredMixin, CreateView):
     model = Profile
     success_url = reverse_lazy('receta_list')
-    fields = ['avatar']
+    fields = ['avatar',]
 
     def form_valid(self, form):
         form.instance.user = self.request.user
